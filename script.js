@@ -104,3 +104,14 @@ function updateBackButtonVisibility() {
         backBtn.style.display = 'none';
     }
 }
+
+// Lógica do Accordion do FAQ
+function toggleFaq(element) {
+    element.classList.toggle('active');
+    let answer = element.nextElementSibling;
+    if (answer.style.maxHeight) {
+        answer.style.maxHeight = null;
+    } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+    } 
+}
