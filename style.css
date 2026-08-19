@@ -1,0 +1,789 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F3F8F5; /* Off-white / Verde menta suave */
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    height: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4CAF50; /* Verde */
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+.main-container {
+    margin-top: 60px; /* Espaço para a progress bar */
+    width: 100%;
+    max-width: 1000px; /* Alargado para caber os dois cards da oferta lado a lado */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.step {
+    display: none;
+    width: 100%;
+    animation: fadeIn 0.5s ease;
+}
+
+.step.active {
+    display: block;
+}
+
+/* Os cards de pergunta do Quiz mantêm max-width menor e centralizado */
+.card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Estilo do Botão Voltar Global (Fixo na ponta da tela) */
+.global-back-btn {
+    position: fixed;
+    top: 25px; /* Abaixo da progress bar (que tem 8px) ou próximo a ela */
+    left: 20px;
+    background: none;
+    border: none;
+    color: #8895a3;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.3s, transform 0.2s;
+    display: none; /* Controlado via JS */
+    align-items: center;
+    gap: 5px;
+    z-index: 100; /* Sempre no topo */
+}
+
+.global-back-btn:hover {
+    color: #3498db;
+    transform: translateX(-3px);
+}
+
+@media (max-width: 600px) {
+    .global-back-btn {
+        top: 20px;
+        left: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+#step-6.card {
+    max-width: 900px; /* Alargado para caber a vitrine */
+}
+
+.step-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* ==================== HEADER DO FUNIL (ETAPA 1) ==================== */
+.funnel-header {
+    text-align: center;
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 10px 15px 0;
+}
+
+.main-headline {
+    color: #00509e;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 15px;
+}
+
+.main-subheadline {
+    color: #4a5568;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-bottom: 35px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-mockup-large {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 850px; /* Bem maior e mais nítido */
+    height: auto;
+}
+
+.quiz-start-card {
+    margin-top: 15px; /* Dá um leve espaço entre a imagem e o cartão */
+    position: relative;
+    z-index: 10;
+}
+
+/* ==================== ETAPA 2 (ANTES E DEPOIS TELAS) ==================== */
+.step-image-desafio {
+    display: block;
+    margin: 0 auto 15px auto;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.alert-banner {
+    background-color: #fff3e0;
+    color: #e65100;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0 auto 20px auto;
+    display: inline-block;
+    border: 1px dashed #ffb74d;
+}
+
+@media (min-width: 601px) {
+    .step-image-desafio {
+        max-width: 420px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-headline {
+        font-size: 1.6rem;
+    }
+    .main-subheadline {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+    .quiz-start-card {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-mockup-large {
+        /* Ignora o padding da tela e cresce a imagem */
+        width: 115%; 
+        max-width: 115%;
+        margin-left: -7.5%;
+    }
+}
+
+.step h2 {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option-btn {
+    background-color: #D6EAF8; /* Azul pastel suave */
+    color: #1a5276;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.option-btn:hover {
+    background-color: #AED6F1;
+    transform: translateY(-2px);
+    border-color: #85C1E9;
+}
+
+.option-btn:active {
+    transform: scale(0.98);
+}
+
+/* Estado da Opção Selecionada (Para quando o usuário volta de etapa) */
+.option-btn.selected {
+    background-color: #AED6F1;
+    border-color: #5DADE2;
+    color: #154360;
+    box-shadow: 0 0 0 2px rgba(93, 173, 226, 0.4);
+}
+
+/* ==================== CARD BÔNUS INGLÊS E CALIGRAFIA (ETAPAS 3 e 4) ==================== */
+.bonus-card-container {
+    border: 1px dashed #2176d2;
+    border-radius: 12px;
+    padding: 30px 20px 20px;
+    margin-bottom: 15px; /* Reduzido para trazer botoes para cima */
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 25px;
+}
+
+.bonus-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2176d2;
+    color: #fff;
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(33, 118, 210, 0.2);
+}
+
+.bonus-title {
+    color: #154360;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.bonus-inner-box {
+    background-color: #1964bc;
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+}
+
+.bonus-left-col, .bonus-right-col {
+    width: 100%;
+}
+
+.bonus-img {
+    max-width: 100%;
+    max-height: 360px; /* Aumentado para a imagem ficar bem maior */
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.bonus-highlight-title {
+    color: #ffc107;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.bonus-desc {
+    color: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.bonus-price-tag {
+    background-color: #114b90;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.bonus-price-tag .strikethrough {
+    text-decoration: line-through;
+    color: #90caf9;
+}
+.bonus-price-tag strong {
+    color: #1de9b6;
+    font-weight: 700;
+}
+
+/* ==================== TEMA LARANJA (BÔNUS DOS PAIS) ==================== */
+.bonus-card-container.orange-theme {
+    border-color: #e65100;
+}
+.orange-theme .bonus-badge {
+    background-color: #e65100;
+    box-shadow: 0 4px 6px rgba(230, 81, 0, 0.2);
+}
+.orange-theme .bonus-title {
+    color: #d84315;
+}
+.orange-theme .bonus-inner-box {
+    background-color: #ef6c00;
+}
+.orange-theme .bonus-price-tag {
+    background-color: #d84315;
+}
+
+@media (min-width: 601px) {
+    #step-3.card, #step-4.card, #step-5.card {
+        max-width: 850px; /* Mais largo para dar respiro à imagem grande */
+    }
+    
+    .bonus-inner-box {
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .bonus-left-col {
+        flex: 0 0 45%; /* Imagem agora ocupa quase metade da caixa */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .bonus-right-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    
+    .bonus-img {
+        max-height: 420px; /* Permite que a capa fique bem alta no PC */
+    }
+}
+
+@media (max-width: 480px) {
+    .bonus-badge {
+        font-size: 0.72rem;
+        padding: 5px 10px;
+    }
+    .bonus-title {
+        font-size: 1.05rem;
+    }
+    .bonus-card-container {
+        padding: 30px 15px 15px;
+    }
+    .bonus-price-tag {
+        font-size: 0.8rem;
+    }
+    .bonus-img {
+        max-height: 320px; /* Muito maior no celular agora */
+    }
+}
+
+/* Tela de Carregamento (Step 6) */
+#loading-screen {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+.spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #4CAF50;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto 30px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== VITRINE DE CONTEÚDO ==================== */
+.showcase-section {
+    margin-bottom: 70px;
+    text-align: center;
+}
+
+.showcase-header h2 {
+    font-size: 1.8rem;
+    color: #005b9f; /* Azul idêntico à imagem */
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.highlight-box {
+    display: inline-block;
+    background: linear-gradient(to right, #ff9800, #f57c00);
+    color: #fff;
+    font-size: 1.9rem;
+    font-weight: 800;
+    padding: 12px 30px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+}
+
+.showcase-header p {
+    font-size: 1.1rem;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    line-height: 1.5;
+}
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.showcase-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 0; /* Removido padding para as imagens colarem nas bordas */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Cortar as pontas da imagem para ficarem arredondadas */
+    border: 1px solid #f0f0f0;
+}
+
+.showcase-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.showcase-card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.showcase-card p {
+    font-weight: 700;
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    padding: 15px 10px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Responsividade específica da Vitrine */
+@media (max-width: 850px) {
+    .showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .showcase-grid {
+        grid-template-columns: 1fr;
+    }
+    .highlight-box {
+        font-size: 1.4rem;
+        padding: 10px 15px;
+    }
+    .showcase-header h2 {
+        font-size: 1.4rem;
+    }
+}
+
+/* ==================== TELA DE OFERTAS (STEP 7) ==================== */
+#result-screen {
+    width: 100%;
+}
+
+.result-title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pricing-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.pricing-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Card Básico - Esquerda */
+.pricing-card.basic {
+    border: 1px solid #e0e0e0;
+    margin-top: 40px; /* Para alinhar com o card destacado que tem a fita/ribbon no topo */
+}
+
+.pricing-card.basic .pricing-header {
+    padding: 30px 20px 20px;
+    text-align: center;
+}
+
+.pricing-card.basic h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.pricing-card.basic .pricing-price {
+    color: #388e3c; /* Verde padrão */
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2px;
+    margin-bottom: 15px;
+}
+
+.pricing-card.basic .currency {
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+
+.pricing-card.basic .amount {
+    font-size: 3.5rem;
+    line-height: 1;
+}
+
+.pricing-card.basic .pricing-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 auto;
+    max-width: 250px;
+}
+
+/* Card Completo (Destacado) - Direita */
+.pricing-card.highlighted {
+    border: 2px solid #2e7d32;
+    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.15);
+}
+
+.ribbon {
+    background-color: #d32f2f; /* Vermelho forte */
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: 10px 10px 0 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pricing-card.highlighted .pricing-header {
+    padding: 25px 20px 15px;
+    text-align: center;
+}
+
+.pricing-card.highlighted h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.old-price {
+    font-size: 0.95rem;
+    color: #777;
+    text-decoration: line-through;
+    margin-bottom: -5px;
+}
+
+.highlight-price {
+    color: #2e7d32;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.highlight-price .currency {
+    font-size: 1.2rem;
+    margin-top: 8px;
+}
+
+.highlight-price .amount {
+    font-size: 4rem;
+    line-height: 1;
+}
+
+/* Comum do Corpo de Preços */
+.pricing-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 0 20px;
+}
+
+.pricing-body {
+    padding: 25px 20px;
+    flex-grow: 1;
+}
+
+.features-list {
+    list-style: none;
+}
+
+.features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+.features-list li svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.bonus-item {
+    background-color: #fff9e6;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px dashed #ffd54f;
+}
+
+.gift-icon {
+    font-size: 1.2rem;
+    margin-top: -2px;
+}
+
+.pricing-footer {
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Botões da Tabela de Preços */
+.btn-basic {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    color: #555;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.btn-basic:hover {
+    background-color: #f5f5f5;
+    color: #333;
+    border-color: #aaa;
+}
+
+.btn-highlight {
+    display: block;
+    width: 100%;
+    padding: 18px 10px;
+    background-color: #ff9800; /* Laranja forte do botão principal */
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+}
+
+.btn-highlight:hover {
+    background-color: #f57c00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 152, 0, 0.5);
+}
+
+.safe-checkout {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+@media (max-width: 850px) {
+    .pricing-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .pricing-card.basic {
+        margin-top: 0;
+    }
+    
+    .pricing-card {
+        max-width: 500px;
+    }
+
+    .result-title {
+        font-size: 1.6rem;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 { font-size: 1.2rem; }
+    .option-btn { font-size: 1rem; }
+    .result-title { font-size: 1.4rem; }
+}

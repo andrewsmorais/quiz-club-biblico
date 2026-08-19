@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Club Bíblico Infantil</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fontes do Google para um design mais bonito -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Botão Voltar Global (Fica na ponta da tela) -->
+    <button id="global-back-btn" class="global-back-btn" onclick="prevStep()">&#8592; Voltar</button>
+
+    <main class="main-container">
+        <!-- Etapa 1 -->
+        <section class="step active" id="step-1">
+            <div class="funnel-header">
+                <img src="assets/images/hero-mockup.png" alt="Mockup Kit Bíblico Infantil" class="hero-mockup-large" onerror="this.style.display='none'">
+            </div>
+            
+            <div class="card quiz-start-card">
+                <h2>Qual a idade do seu filho(a)?</h2>
+                <div class="options">
+                    <button class="option-btn" onclick="selectOption(this)">2 a 4 anos</button>
+                    <button class="option-btn" onclick="selectOption(this)">5 a 7 anos</button>
+                    <button class="option-btn" onclick="selectOption(this)">8 a 10 anos</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Etapa 2 -->
+        <section class="card step" id="step-2">
+            <img src="assets/images/desafio-telas.jpg" alt="Contraste Telas x Atividades Bíblicas" class="step-image-desafio" onerror="this.style.display='none'">
+            <div class="alert-banner">
+                📱 Menos Telas, Mais Fé e Aprendizado!
+            </div>
+            <h2>Qual o maior desafio na rotina do seu pequeno(a) hoje?</h2>
+            <div class="options">
+                <button class="option-btn" onclick="selectOption(this)">Excesso de celular/telas</button>
+                <button class="option-btn" onclick="selectOption(this)">Aprender sobre a Bíblia</button>
+                <button class="option-btn" onclick="selectOption(this)">Falta de foco/atenção</button>
+            </div>
+        </section>
+
+        <!-- Etapa 3: Bônus Inglês -->
+        <section class="card step" id="step-3">
+            <!-- Card Visual Bônus Inglês -->
+            <div class="bonus-card-container">
+                <div class="bonus-badge">🎁 BÔNUS EXTRA EXCLUSIVO (DISPONÍVEL APENAS HOJE)</div>
+                <h3 class="bonus-title">Garanta o Kit Completo e leve também o Curso/Acervo de Inglês Infantil!</h3>
+                
+                <div class="bonus-inner-box">
+                    <div class="bonus-left-col">
+                        <img src="Bonus Atividades em Inglês.jpg" alt="Bônus Atividades em Inglês" class="bonus-img" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="bonus-right-col">
+                        <h4 class="bonus-highlight-title">BÔNUS ESPECIAL: Combo Inglês Infantil (+500 Atividades Práticas)</h4>
+                        <div class="bonus-price-tag">
+                            <span class="strikethrough">Valor Normal: R$ 49,90</span> <span style="margin:0 5px;">|</span> <strong>Para você Hoje: GRÁTIS no Kit Completo</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 15px;">Você sabia que aprender inglês na infância prepara o seu filho para as melhores oportunidades do mercado de trabalho e futuro?</h2>
+            <div class="options" style="margin-top: 10px;">
+                <button class="option-btn" onclick="selectOption(this)">Sim, quero preparar meu filho desde cedo!</button>
+                <button class="option-btn" onclick="selectOption(this)">Não sabia, mas quero essa vantagem para ele!</button>
+            </div>
+        </section>
+
+        <!-- Etapa 4 (NOVA): Bônus Caligrafia -->
+        <section class="card step" id="step-4">
+            <!-- Card Visual Bônus Caligrafia -->
+            <div class="bonus-card-container">
+                <div class="bonus-badge">🎁 BÔNUS EXTRA EXCLUSIVO (INCLUSO NO KIT)</div>
+                <h3 class="bonus-title">Estimule a Coordenação Motora e a Alfabetização do seu filho!</h3>
+                
+                <div class="bonus-inner-box">
+                    <div class="bonus-left-col">
+                        <img src="caligrafia-1.png" alt="Bônus Caligrafia" class="bonus-img" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="bonus-right-col">
+                        <h4 class="bonus-highlight-title">BÔNUS 1: Caderno de Caligrafia e Números Pontilhados</h4>
+                        <div class="bonus-price-tag">
+                            <span class="strikethrough">Valor Normal: R$ 29,90</span> <span style="margin:0 5px;">|</span> <strong>Para você Hoje: GRÁTIS no Kit Completo</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 15px;">Seu filho(a) está em fase de alfabetização ou precisa melhorar a coordenação motora na escrita?</h2>
+            <div class="options" style="margin-top: 10px;">
+                <button class="option-btn" onclick="selectOption(this)">Sim, este material de apoio vai ajudar muito!</button>
+                <button class="option-btn" onclick="selectOption(this)">Sim, quero que ele aprenda a escrever de forma leve!</button>
+            </div>
+        </section>
+
+        <!-- Etapa 5 -->
+        <section class="card step" id="step-5">
+            <div class="bonus-card-container orange-theme">
+                <div class="bonus-badge">🔥 MAIS UM BÔNUS EXCLUSIVO (HOJE)</div>
+                <h3 class="bonus-title">O Kit do seu filho agora vem com o Guia Definitivo para os Pais!</h3>
+                
+                <div class="bonus-inner-box">
+                    <div class="bonus-left-col">
+                        <img src="assets/images/bonus-pais-capa.png" alt="Capa Panorama Bíblico" class="bonus-img" onerror="this.style.display='none'">
+                    </div>
+                    
+                    <div class="bonus-right-col">
+                        <h4 class="bonus-highlight-title">BÔNUS GUIA DOS PAIS: Panorama Bíblico Ilustrado</h4>
+                        <div class="bonus-price-tag">
+                            <span class="strikethrough">Valor Normal: R$ 47,00</span> <span style="margin:0 5px;">|</span> <strong>Hoje: GRÁTIS no Kit Completo</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 15px;">Você gostaria de incluir momentos da Palavra de Deus de forma leve na rotina da família?</h2>
+            <div class="options" style="margin-top: 10px;">
+                <button class="option-btn" onclick="selectOption(this)">Sim, é muito importante para nós!</button>
+                <button class="option-btn" onclick="selectOption(this)">Gostaria, mas não sei por onde começar.</button>
+            </div>
+        </section>
+
+        <!-- Etapa 6 (Vitrine Completa) -->
+        <section class="card step" id="step-6">
+            <!-- Vitrine de Conteúdo -->
+            <div class="showcase-section" style="margin-bottom: 40px;">
+                <div class="showcase-header">
+                    <h2>O que você recebe ao garantir o</h2>
+                    <div class="highlight-box">KIT COMPLETO CLUB BÍBLICO:</div>
+                    <p>Além das Histórias Bíblicas, você libera o acervo completo de Alfabetização, Caligrafia, Versículos e os personagens favoritos dos pequenos (Pooh, Stitch e Jesus)!</p>
+                </div>
+                
+                <div class="showcase-grid">
+                    <div class="showcase-card">
+                        <img src="Histórias Bíblicas Antigo Testamento.png" alt="Histórias Bíblicas Antigo Testamento" onerror="this.style.display='none'">
+                        <p>Histórias Bíblicas Antigo Testamento</p>
+                    </div>
+                    <div class="showcase-card">
+                        <img src="Histórias Bíblicas Novo Testamento.png" alt="Histórias Bíblicas Novo Testamento" onerror="this.style.display='none'">
+                        <p>Histórias Bíblicas Novo Testamento</p>
+                    </div>
+                    <div class="showcase-card">
+                        <img src="MEU CADERNO DE ALFABETIZAÇÃO - GRUPO MATERIAIS PEDAGÓGICOS.png" alt="Meu Caderno de Alfabetização" onerror="this.style.display='none'">
+                        <p>Meu Caderno de Alfabetização</p>
+                    </div>
+                    <div class="showcase-card">
+                        <img src="Colorindo versiculos da Bíblia.png" alt="Colorindo Versículos da Bíblia" onerror="this.style.display='none'">
+                        <p>Colorindo Versículos da Bíblia</p>
+                    </div>
+                    <div class="showcase-card">
+                        <img src="Colorindo com Stitch.png" alt="Livro Colorindo com Stitch" onerror="this.style.display='none'">
+                        <p>Livro Colorindo com Stitch</p>
+                    </div>
+                    <div class="showcase-card">
+                        <img src="Colorindo com Ursinho Pooh.png" alt="Livro Colorindo com Ursinho Pooh" onerror="this.style.display='none'">
+                        <p>Livro Colorindo com Ursinho Pooh</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Se você pudesse levar o Acervo Bíblico Completo + Combo de Inglês Infantil (+500 Atividades) + Guia para Pais em um só kit, ajudaria na sua rotina?</h2>
+            <div class="options" style="max-width: 600px; margin: 0 auto;">
+                <button class="option-btn" onclick="selectOption(this)">Com certeza, seria perfeito!</button>
+                <button class="option-btn" onclick="selectOption(this)">Sim, quero ver a oferta!</button>
+            </div>
+        </section>
+
+        <!-- Etapa 7: Loading -->
+        <section class="card step" id="loading-screen">
+            <div class="spinner"></div>
+            <h2>Analisando as respostas e selecionando as melhores atividades em PDF...</h2>
+        </section>
+
+        <!-- Etapa 8: Resultado / Ofertas com as Duas Opções -->
+        <section class="step" id="result-screen">
+            <h2 class="result-title">Escolha o pacote ideal para transformar o tempo do seu filho(a) HOJE</h2>
+            
+            <div class="pricing-container">
+                <!-- Card do Pacote Básico -->
+                <div class="pricing-card basic">
+                    <div class="pricing-header">
+                        <h3>PACOTE BÁSICO</h3>
+                        <div class="pricing-price">
+                            <span class="currency">R$</span><span class="amount">19,90</span>
+                        </div>
+                        <p class="pricing-subtitle">Ideal para quem quer apenas o material principal.</p>
+                    </div>
+                    
+                    <div class="pricing-divider"></div>
+
+                    <div class="pricing-body">
+                        <ul class="features-list">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Combo Histórias Bíblicas Ilustradas (Antigo e Novo Testamento)</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Formato Digital em PDF (Pronto para Imprimir)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-footer">
+                        <a href="https://pay.kiwify.com.br/6vXRoiR" class="btn-basic" target="_blank">QUERO APENAS O BÁSICO</a>
+                    </div>
+                </div>
+
+                <!-- Card do Kit Completo (Destacado) -->
+                <div class="pricing-card highlighted">
+                    <div class="ribbon">MAIS VENDIDO - MAIOR DESCONTO</div>
+                    <div class="pricing-header">
+                        <h3>KIT COMPLETO CLUB BÍBLICO + BÔNUS EXCLUSIVOS</h3>
+                        <div class="old-price">De R$ 69,40 por apenas</div>
+                        <div class="pricing-price highlight-price">
+                            <span class="currency">R$</span><span class="amount">47,90</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-divider"></div>
+
+                    <div class="pricing-body">
+                        <ul class="features-list bold-checks">
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Combo Histórias Bíblicas (Antigo e Novo Testamento - Colorido e Para Colorir)</li>
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Caderno de Caligrafia e Números Pontilhados</li>
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Meu Caderno de Alfabetização</li>
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Livro Colorindo com Jesus</li>
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Livro Colorindo Versículos da Bíblia</li>
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Livro Colorindo com Ursinho Pooh</li>
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Livro Colorindo com Stitch</li>
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Arquivos em PDF Prontos para Imprimir (Tamanho A4)</li>
+                            <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2e7d32"></circle><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none"></path></svg></i> Acesso Vitalício + Atualizações Gratuitas</li>
+                            <li class="bonus-item"><span class="gift-icon">🎁</span> <div><strong>SUPER BÔNUS 1:</strong> Combo Inglês Infantil (+500 Atividades em 8 Apostilas)</div></li>
+                            <li class="bonus-item"><span class="gift-icon">🎁</span> <div><strong>SUPER BÔNUS 2:</strong> e-Book Panorama Bíblico Ilustrado (Guia Exclusivo para Pais)</div></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-footer">
+                        <a href="https://pay.kiwify.com.br/aEVGdVF" class="btn-highlight" target="_blank">QUERO O KIT COMPLETO COM TODOS OS BÔNUS</a>
+                        <p class="safe-checkout"><svg style="width:14px; vertical-align:middle; margin-right:4px;" viewBox="0 0 24 24" fill="#666"><path d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.757-2.243-5-5-5zm-3 5c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7zm3 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg> Compra 100% segura | Acesso Imediato | Garantia de 7 dias</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
